@@ -1,0 +1,104 @@
+Forum divided into 4 parts
+	Receiption
+	Disassembly
+	Inspection
+	Closure
+	
+Title "Housing Disassembly"
+ 
+	Start - "Receiption" Section - Toggle section visibility (receiption)
+		
+		"Gear Box or Planetary" - Radio Button
+			#Toggle between two different form lay outs - Planetary isn't currently supported.  Future Use
+		
+		"Received As Photos of Gearbox - Required "
+			-Photos of Front *External*
+			-Photos of Back *External*
+			-Photos of Right *External*
+			-Photos of Left *External*
+				-Unlimited "Additional Photos" *Internal*
+				
+		"Are there items of concern such as damage - Required" - Radio Button Yes/No
+			#Default No
+			#If Yes toggle loop
+				-"Photo(s) of item of concern - Required" *Internal*
+				-Comment
+					"Are there more items of concern"
+					Required Check Box
+						#Default No
+						#If Yes repeat menu
+						
+		"Does the Gearbox have a Nameplate, or any Tags - Required" - Radio Button Yes/No			
+			#Default Yes
+				- prompt "Two photos of nameplate from different angles" - Required two photos *Unsure Internal/External* (link photo data to Nameplate data in Closure Section)
+				- "Any additional photos of Nameplate or additional tags" - not required, unlimited photos
+			#If No - Carry Data that it has no Nameplate and "Hide" Nameplate information in Closure Section
+				//Can we have a link to the Nameplate Section, is it a seperate entity? //
+			
+		"Does the Gearbox have an Input Coupling?" - Radio Button Yes/No
+			#Default No
+			#If Yes toggle
+				prompt "Photo of input Coupling" *Unsure Internal/External*
+				text box - "Input overhang Lenght of shaft... (Need guidance on messurement point)" 
+				Additional photos of Input coupling *Internal*
+				Text box - "Comments, such as coupling condition"
+					//Can we have a link to the Input Coupling Section, is it a seperate entity? //
+					
+		"Does the Gearbox have an Output Coupling?" - Radio Button Yes/No
+			#Default No
+			#If Yes toggle
+				prompt "Photo of Output Coupling" *Unsure Internal/External*
+				text box - "Input overhang Lenght of shaft... (Need guidance on messurement point)" 
+				Additional photos of Output coupling *Internal*
+				Text box - "Comments, such as coupling condition"
+					//Can we have a link to the Input Coupling Section, is it a seperate entity? //
+
+		"Does the Gearbox have a Breather"  - Radio Box Yes/No
+			#Default No 
+			#If Yes toggle
+				radio buttons - "Reuse", "Repair", "Replace".
+				text box - "Optional - What is the part number if visisible"
+					//Carry data & Part Number
+			
+		"Does the Gearbox have a Dipstick"
+			- Radio Box Yes/No
+				#Default No 
+				#If Yes toggle
+					radio buttons - "Reuse", "Repair", "Replace".
+					text box - "Optional - What is the part number if visisible"
+					//Carry data & Part Number
+					
+		"Does the Gearbox have any other external items.  Such as additional couplings, motors, lube system, fans, etc"
+			- Radio Box Yes/No
+				#Default No 
+				#If Yes toggle loop
+					prompt "Photo of other item" *Unsure Internal/External*
+					text box - "What is the item" 
+					Text box - "Comments"
+					Checkbox - "Are there more items of concern" default no
+						Required Check Box
+						#Default No
+						#If Yes repeat menu
+
+		"Does the Gearbox have it's own shipping container/stand"
+			- Radio Box Yes/No
+				#Default No 
+				#If Yes
+					prompt "Photo of shipping container/stand" *internal*
+					
+		*Did you drain the oil from the unit" - Radio Button Yes/No
+		//No Data carried, procedural for disassembly//
+
+		//Add a prompt to inquire if phase complete and toggle visibility of this element to collapse //
+
+	End "Receiption" Section - 
+
+Start - "Disassembly" Section - Toggle section visibility (disassembly)
+
+			"Does the Gearbox have an inspection plate"
+			- Radio Box Yes/No
+				#Default No 
+				#If Yes toggle
+					prompt "Photo of plate external"
+					prompt "Photo of plate removed"
+					prompt "Photo of inside of gear box from inspection plate"
