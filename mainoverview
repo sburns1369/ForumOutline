@@ -3,12 +3,30 @@ Forum divided into 4 parts
 	Disassembly
 	Inspection
 	Closure
-	
+
+// 
+In respect to photos, external photos should be saved locally on the tablet, and forwarded to the "end report"  I believe it is a word document, or something to that effect. Internal photos only need to be saved to the local tablet and not forwarded with the report
+
+// To my understanding is that a "Tech" will document the initial interaction with this form and record events during the Receiption and Disassembly.  A second person the "Inspector" will take over this process and will basically QC the existing input, and then will finish recording the documentation
+
+//Procedural information does't need to be tracked outside of this form, and is only to aid in the process of this form moving between other techs and the inspector
+
+// I should note some sort of documentation.
+
+"//" ... "//" areas of comments and notes multi line, single lead //for single line comment
+items in "parenthesis" 
+Iems flagged between *astricks* at the end of a line are indications of where data should go.
+such as *internal* to save to local device only
+or *external* to save to local device, and forward at the end with the report
+Comments follow #poundsign are procedural or event related
+//
+
+
 Title "Housing Disassembly"
  
 	Start - "Receiption" Section - Toggle section visibility (receiption)
 		
-		"Gear Box or Planetary" - Radio Button
+		"Gear Box or Planetary" - Radio_Button to toggle between two options
 			#Toggle between two different form lay outs - Planetary isn't currently supported.  Future Use
 		
 		"Received As Photos of Gearbox - Required "
@@ -18,87 +36,196 @@ Title "Housing Disassembly"
 			-Photos of Left *External*
 				-Unlimited "Additional Photos" *Internal*
 				
-		"Are there items of concern such as damage - Required" - Radio Button Yes/No
+		"Are there items of concern such as damage - Required" - Radio_Button Yes/No
 			#Default No
 			#If Yes toggle loop
 				-"Photo(s) of item of concern - Required" *Internal*
-				-Comment
+				-Comment entry note
 					"Are there more items of concern"
 					Required Check Box
 						#Default No
 						#If Yes repeat menu
 						
-		"Does the Gearbox have a Nameplate, or any Tags - Required" - Radio Button Yes/No			
+		prompt - "Does the Gearbox spin (Try spinning the input both directions)" Radio_Button Yes/No
+			#if Yes
+				-prompt "Does it sping clockwise, or counter clockwise"
+				Radio_Button Clockwise, CounterClock, Both
+			
+		"Does the Gearbox have a Nameplate, or any Tags - Required" - Radio_Button Yes/No			
 			#Default Yes
-				- prompt "Two photos of nameplate from different angles" - Required two photos *Unsure Internal/External* (link photo data to Nameplate data in Closure Section)
-				- "Any additional photos of Nameplate or additional tags" - not required, unlimited photos
+				- prompt "Two photos of nameplate from different angles" - Required two photos *External* (link photo data to Nameplate data in Closure Section)
+				- "Any additional photos of Nameplate or additional tags" - *internal* not required, unlimited photos
 			#If No - Carry Data that it has no Nameplate and "Hide" Nameplate information in Closure Section
 				//Can we have a link to the Nameplate Section, is it a seperate entity? //
 			
-		"Does the Gearbox have an Input Coupling?" - Radio Button Yes/No
+		"Does the Gearbox have an Input Coupling?" - Radio_Button Yes/No
 			#Default No
 			#If Yes toggle
-				prompt "Photo of input Coupling" *Unsure Internal/External*
+				prompt "Photo of input Coupling" *External*
 				text box - "Input overhang Lenght of shaft... (Need guidance on messurement point)" 
+				text box - "Indent or overhang of coupleing on shaft" - Intiger entry - default 0 if possible.  Supports two decimels
 				Additional photos of Input coupling *Internal*
 				Text box - "Comments, such as coupling condition"
 					//Can we have a link to the Input Coupling Section, is it a seperate entity? //
 					
-		"Does the Gearbox have an Output Coupling?" - Radio Button Yes/No
+		"Does the Gearbox have an Output Coupling?" - Radio_Button Yes/No
 			#Default No
 			#If Yes toggle
-				prompt "Photo of Output Coupling" *Unsure Internal/External*
+				prompt "Photo of Output Coupling" *External*
 				text box - "Input overhang Lenght of shaft... (Need guidance on messurement point)" 
+				text box - "Indent or overhang of coupleing on shaft" - Intiger entry - default 0 if possible.  Supports two decimels
 				Additional photos of Output coupling *Internal*
 				Text box - "Comments, such as coupling condition"
 					//Can we have a link to the Input Coupling Section, is it a seperate entity? //
 
-		"Does the Gearbox have a Breather"  - Radio Box Yes/No
+		"Does the Gearbox have a Breather"  - Radio_Button Yes/No
 			#Default No 
 			#If Yes toggle
 				radio buttons - "Reuse", "Repair", "Replace".
 				text box - "Optional - What is the part number if visisible"
+				prompt "Photo of Breather" *internal*
 					//Carry data & Part Number
 			
 		"Does the Gearbox have a Dipstick"
-			- Radio Box Yes/No
+			- Radio_Button Yes/No
 				#Default No 
 				#If Yes toggle
-					radio buttons - "Reuse", "Repair", "Replace".
+					Radio_Button - "Reuse", "Repair", "Replace".
 					text box - "Optional - What is the part number if visisible"
+					prompt "Photo of Dipstick" *internal*
 					//Carry data & Part Number
 					
 		"Does the Gearbox have any other external items.  Such as additional couplings, motors, lube system, fans, etc"
-			- Radio Box Yes/No
+			- Radio_Button Yes/No
 				#Default No 
 				#If Yes toggle loop
-					prompt "Photo of other item" *Unsure Internal/External*
+					prompt "Photo of other item" *Internal*
 					text box - "What is the item" 
 					Text box - "Comments"
-					Checkbox - "Are there more items of concern" default no
+					Radio_Button Yes/No - "Are there more items of concern" default no
 						Required Check Box
 						#Default No
 						#If Yes repeat menu
 
 		"Does the Gearbox have it's own shipping container/stand"
-			- Radio Box Yes/No
+			- Radio_Button Yes/No
 				#Default No 
 				#If Yes
 					prompt "Photo of shipping container/stand" *internal*
 					
-		*Did you drain the oil from the unit" - Radio Button Yes/No
+		*Did you drain the oil from the unit" - Radio_Button Yes/No
 		//No Data carried, procedural for disassembly//
 
 		//Add a prompt to inquire if phase complete and toggle visibility of this element to collapse //
 
 	End "Receiption" Section - 
 
-Start - "Disassembly" Section - Toggle section visibility (disassembly)
+	Start - "Disassembly" Section - Toggle section visibility (disassembly)
 
-			"Does the Gearbox have an inspection plate"
-			- Radio Box Yes/No
-				#Default No 
-				#If Yes toggle
-					prompt "Photo of plate external"
-					prompt "Photo of plate removed"
-					prompt "Photo of inside of gear box from inspection plate"
+		prompt "Does the Gearbox have an inspection plate"
+		- Radio_Button Yes/No
+			#Default No 
+			#If Yes toggle
+				prompt "Photo of plate external" *internal*
+				prompt "Photo of plate removed" *internal*
+				prompt "Photo of inside of gear box from inspection plate" *internal*
+
+		prompt - "Are there any couplings being removed" - required
+			- Radio_Button Yes/No
+				#default No
+				#if Yes
+					-prompt "Photo of coupling before removed" *internal*
+					-prompt "Photo of coupling after removed" *internal*
+					-prompt "Photo of shaft after coupling removed" *internal*
+					
+		prompt - "Are there any external items being removed" - required
+			- Radio_Button Yes/No
+				#default No
+				#if Yes
+					-prompt "Photos of items being removed" *internal*
+					-prompt "What items are being removed" text box
+					
+					// Maybe build this out, possible dropdown box of items, fan, heater, lube system, etc (or other) //
+					
+		prompt - "How many shafts does the gearbox have"
+				Drop Box "2-12 (?)
+					
+					// Either use Math or define the value from the shafts to carry values
+					The first shaft will always be "300" and "OutputShaft"
+					The last value will always be "Input" Shaft
+					Any shaft between first and last will be Intermediate(Number) (see below)
+					Shafts start at 300, and progress by 100's
+					examples
+					
+					2 shaft = 300 "Output", 400 "Input"
+					5 shafts = 300 "Output, 400 "Intermediate 1", 500 "Intermediate 2", 600 "Intermediate 3", 700 "Input"
+					This math is needed to be calculated and carried to influence the questions/data with in the form and report
+					//
+				
+		prompt - "Are the retaining plates intact"
+			- Radio_Button Yes/No/Na
+				// Carry data about retaining plates in Closure
+				#default Yes
+				#If No
+					- prompt "Photo(s) or missing or damaged retaining plates" *internal**
+			
+		prompt - "Are the retaining plates and housing marks? IE: stamped "A" "B", etc - Radio_Button yes/no
+			//procedural information, no data carried outside form
+		
+		prompt "Photo of Gearbox stripped before the lid is removed" -required
+			- Photo of the Gearbox stripped (unknown_location)
+
+		prompt "Is the Gearbox a split Gearbox?" - required
+			- Radio_Button Yes/No
+				#default No
+				// If No, carry data "NA" to .002 feeler at split in Closure
+				// Can toggle also the "required" flags for applicaible data sets?
+			 	#If  Yes
+					- Prompt "Is there a gasket on the split?"
+						Radio_Button Yes/No
+						#default No
+						// Carry Data to "Is there a gasket at the split in Closure"
+						
+						prompt "Photo of Gearbox with lid removed in the air (overview)" - require
+							-photo of the Gearbox with lid removed wide view in base of gearbox *(unknown_location)*
+						
+						loop based on the number of shafts
+							prompt "Sideview Photo of the 300 shaft in Gearbox"
+								-Photo of shaft (number) in Gearbox"
+								-Prompt "Any objects of concern"
+									Radio_Button yes/no
+									#default no
+									#if yes
+										-prompt photos (internal)
+						 
+						-prompt "Do any shafts have clutches"
+							Radio_Button Yes/No
+							#default No
+							#if Yes 
+								prompt "Two Photos of the clutch (from different sides) *external*
+								// We should carry this data to closure, but we don't currently //
+															
+						-prompt "Is there any internal lubrication systems" Radio_Button Yes/No
+							#if Yes
+								-prompt "Photos of the internal lubrication system" *internal*
+								
+						-prompt "Is there any other items of interest inside the gear box? Heating systems, wire, etc" Radio_Button Yes/No
+							#if Yes
+								-prompt "Photos of the items of intereste" *internal*
+						
+						prompt - "Photo of inside gearbox lid flipped - required" - *external*
+						
+		Prompt loop based on number of shafts
+			prompt "Photo of the {number} shaft removed from gearbox" *external*
+				-photo of shaft (number) removed
+				-Prompt "Any objects of concern, such as visible damage"
+					Radio_Button yes/no
+						#default no
+						#if yes
+							-prompt photos (internal)
+						
+		Prompt loop based on number of shafts	
+			prompt "Take a series of photos of the {number} shaft being disassembled, please try to include bearing numbers before torching them off" *internal*
+			prompt "Does the {nnumber} shaft have a spacer"
+				//carry data to closure
+			
